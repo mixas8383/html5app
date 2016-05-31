@@ -15,19 +15,38 @@ app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) 
         }
 
         Math.random()
+        $scope.tempFigureIndex = 0;
+        $scope.relations = [];
         $scope.items = coords;
         $scope.texts = texts;
         $scope.sectorClick = function (a, b, c, d)
         {
             a.cords = '';
+            $scope.tempFigureIndex = a.idx;
 
- 
+
+        }
+
+        $scope.numberClick = function (a, b, c, d)
+        {
+            
+            if($scope.tempFigureIndex <0)
+                return;
+            
+            a.cords = '';
+            $scope.relations[$scope.tempFigureIndex] = a.idx
+            a.text = '';
+            a.x = -100;
+            a.y = -100;
+            $scope.tempFigureIndex = -1;
+
+console.log($scope.relations);
         }
 
 
-       
+
         $scope.timerCounter = 0;
-      
+
 
         var stop;
         $scope.fight = function () {
@@ -36,7 +55,7 @@ app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) 
                 return;
 
             stop = $interval(function () {
-               $scope.timerCounter++;
+                $scope.timerCounter++;
             }, 1000);
         };
 
@@ -49,7 +68,7 @@ app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) 
 
         $scope.resetFight = function () {
             $scope.timerCounter = 0;
-           
+
         };
 
         $scope.$on('$destroy', function () {

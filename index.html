@@ -18,18 +18,21 @@
 
 
             <svg viewBox="0 0 575 458" xmlns="http://www.w3.org/2000/svg" " xmlns:bx="https://www.boxy-svg.com/bx">
+            <defs>
+            <style id="bx-google-fonts">@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900,100italic,300italic,400,400italic,500italic,700italic,900italic);</style>
+            </defs>
             <path ng-repeat="item in items" ng-click="sectorClick(item)" ng-attr-d="{{item.cords}}" style="stroke: black; fill: rgb({{item.color}});"  />
-            
-            <text ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}">1</text>
-            
+
+            <text ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}" ng-click="numberClick(text)">1</text>
+
             </svg>
-            
+
             Timer : <font color='red'>{{timerCounter}}</font>
-           
-         <button type="button" data-ng-click="fight()">Fight</button>
-    <button type="button" data-ng-click="stopFight()">StopFight</button>
-    <button type="button" data-ng-click="resetFight()">resetFight</button>
-           
+
+            <button type="button" data-ng-click="fight()">Fight</button>
+            <button type="button" data-ng-click="stopFight()">StopFight</button>
+            <button type="button" data-ng-click="resetFight()">resetFight</button>
+
         </div>
 
 
