@@ -21,7 +21,16 @@ app.controller('gameCtrl', function($scope) {
  
     Math.random()
     $scope.items = coords;
-   
+       $scope.sectorClick = function(a,b,c,d)
+       {
+           a.cords = '';
+           
+           console.log(a);
+           console.log(b);
+           console.log(c);
+           console.log(d);
+          
+       }
 });
 
 
