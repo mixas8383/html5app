@@ -19,6 +19,9 @@
 
             <svg viewBox="0 0 575 458" xmlns="http://www.w3.org/2000/svg" " xmlns:bx="https://www.boxy-svg.com/bx">
             <path ng-repeat="item in items" ng-click="sectorClick(item)" ng-attr-d="{{item.cords}}" style="stroke: black; fill: rgb({{item.color}});"  />
+            
+            <text ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}">1</text>
+            
             </svg>
             
             Timer : <font color='red'>{{timerCounter}}</font>

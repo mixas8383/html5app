@@ -16,12 +16,12 @@ app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) 
 
         Math.random()
         $scope.items = coords;
+        $scope.texts = texts;
         $scope.sectorClick = function (a, b, c, d)
         {
             a.cords = '';
 
-
-
+ 
         }
 
 
