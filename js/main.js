@@ -2,79 +2,6 @@
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-var Gm = function () {
-    this.relations = null;
-    this.state = 0;// o game init 1- game starter 2-game wone 
-    this.currentNumber = 0;
-    this.currentNextNumber = 1;
-
-
-    this.setRelation = function (array)
-    {
-        this.relations = array;
-    }
-
-    this.findNumberIndex = function (i)
-    {
-        return this.relations[i];
-    }
-    this.findSectorIndex = function (k)
-    {
-
-        for (i = 0; i < this.relations.length; i++)
-        {
-            if (k == this.relations[i])
-            {
-                return i;
-            }
-        }
-
-    }
-
-    this.start = function ()
-    {
-        this.state = 1;
-    }
-    this.incrementCounter = function ()
-    {
-        this.currentNumber++;
-        this.currentNextNumber++;
-    }
-
-
-
-
-    this.getRandomize = function ()
-    {
-        var array = new Array();
-        for (i = 0; i < 90; i++)
-        {
-            array[i] = i + 1;
-        }
-
-
-        var currentIndex = array.length, temporaryValue, randomIndex;
-
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-
-            // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
-    }
-
-
-
-
-};
 
 
 
@@ -94,6 +21,8 @@ app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) 
         $scope.relations = [];
         $scope.items = coords;
         $scope.currentIndex = 0;
+        $scope.nextIndex = 1;
+        $scope.gameMessage = ''
         gameClass.setRelation(relation);
 
 
@@ -103,27 +32,56 @@ app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) 
 
             coords[i].gameIndex = randomed[i];
             texts[gameClass.findNumberIndex(coords[i].idx)].gameIndex = randomed[i];
-            console.log(texts[i].idx)
+
             texts[i].text = randomed[i];
 
         }
 
         $scope.texts = texts;
 
+        $scope.someClick = function (itemIdx, textIdx)
+        {
+
+            item = $scope.items[itemIdx];
+            text = $scope.texts[textIdx];
+            if (!gameClass.isStarted())
+            {
+                $scope.fight();
+            }
+
+
+
+            clikedIndex = item.gameIndex;
+
+            console.log(clikedIndex)
+            if (!gameClass.chekItem(clikedIndex))
+            {
+                $scope.gameMessage = 'wrong item'
+                return;
+            }
+
+
+            console.lo
+
+            $scope.currentIndex = gameClass.getCurrenNumber()
+            $scope.nextIndex = gameClass.getNextNumber()
+
+
+
+
+
+
+
+        }
 
 
 
 
         $scope.sectorClick = function (item)
         {
-
-            item.cords = '';
-            $scope.tempFigureIndex = item.idx;
-
+            $scope.gameMessage = '';
             selfIdx = gameClass.findNumberIndex(item.idx);
-            $scope.texts[selfIdx].x = -1;
-            $scope.texts[selfIdx].y = -1;
-            $scope.currentIndex = item.gameIndex;
+            $scope.someClick(item.idx, selfIdx)
 
         }
 
@@ -131,23 +89,10 @@ app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) 
 
         $scope.numberClick = function (a, b, c, d)
         {
-
-
-
-
-            a.cords = '';
-
+            $scope.gameMessage = '';
             sectorIdx = gameClass.findSectorIndex(a.idx);
+            $scope.someClick(sectorIdx, a.idx)
 
-            $scope.items[sectorIdx].cords = '';
-
-
-            a.text = '';
-            a.x = -100;
-            a.y = -100;
-            $scope.tempFigureIndex = -1;
-            $scope.currentIndex = a.gameIndex;
-            console.log($scope.relations);
         }
 
 
