@@ -5,7 +5,23 @@ function getRandomInt(min, max) {
 
 
 
-var app = angular.module('game', []);
+var app = angular.module('game', []).directive('resize', ['$window', function ($window) {
+        return {
+            link: function (scope, el, attrs) {
+                var initialWidth = $window.innerWidth
+$window.in
+                console.log(initialWidth)
+
+
+                angular.element($window).on('resize', function () {
+                    el.css('width', $window.innerWidth);
+                    el.css('height', $window.innerHeight*0.9);
+
+                    
+                });
+            }
+        };
+    }]);
 app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) {
 
 
