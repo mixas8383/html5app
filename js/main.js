@@ -15,22 +15,25 @@ $window.in
 
                 angular.element($window).on('resize', function () {
                     el.css('width', $window.innerWidth);
-                    el.css('height', $window.innerHeight*0.9);
+                    el.css('height', $window.innerHeight*0.92);
 
                     
                 });
             }
         };
     }]);
-app.controller('gameCtrl', ['$scope', '$interval', function ($scope, $interval) {
+app.controller('gameCtrl', ['$scope', '$interval','$window', function ($scope, $interval,$window) {
 
-
+ 
 
         for (i = 0; i < coords.length; i++)
         {
             coords[i].color = getRandomInt(0, 255) + ', ' + getRandomInt(0, 255) + ', ' + getRandomInt(0, 255);
         }
-
+        
+       // $('.mysvg').css('width', $window.innerWidth)
+angular.element('.mysvg').attr('width', $window.innerWidth+'px');
+angular.element('.mysvg').attr('height', ($window.innerHeight*0.92)+'px');
         gameClass = new Gm;
 
         $scope.tempFigureIndex = 0;
