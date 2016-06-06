@@ -2,6 +2,14 @@
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    console.log('------------------------');
+    console.log(Media);
+}
+ //var my_media = new Media('media/error.mp3');
+
+
 
 
 
@@ -9,31 +17,33 @@ var app = angular.module('game', []).directive('resize', ['$window', function ($
         return {
             link: function (scope, el, attrs) {
                 var initialWidth = $window.innerWidth
-$window.in
+                $window.in
                 console.log(initialWidth)
 
 
                 angular.element($window).on('resize', function () {
                     el.css('width', $window.innerWidth);
-                    el.css('height', $window.innerHeight*0.92);
+                    el.css('height', $window.innerHeight * 0.92);
 
-                    
+
                 });
             }
         };
     }]);
-app.controller('gameCtrl', ['$scope', '$interval','$window', function ($scope, $interval,$window) {
+app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, $interval, $window) {
 
- 
+
 
         for (i = 0; i < coords.length; i++)
         {
             coords[i].color = getRandomInt(0, 255) + ', ' + getRandomInt(0, 255) + ', ' + getRandomInt(0, 255);
+            coords[i].oldColor = coords[i].color;
+
         }
-        
-       // $('.mysvg').css('width', $window.innerWidth)
-angular.element('.mysvg').attr('width', $window.innerWidth+'px');
-angular.element('.mysvg').attr('height', ($window.innerHeight*0.92)+'px');
+
+        // $('.mysvg').css('width', $window.innerWidth)
+        angular.element('.mysvg').attr('width', $window.innerWidth + 'px');
+        angular.element('.mysvg').attr('height', ($window.innerHeight * 0.92) + 'px');
         gameClass = new Gm;
 
         $scope.tempFigureIndex = 0;
@@ -66,7 +76,11 @@ angular.element('.mysvg').attr('height', ($window.innerHeight*0.92)+'px');
             if (!gameClass.isStarted())
             {
                 $scope.fight();
+               
             }
+
+
+
 
 
 
@@ -75,12 +89,13 @@ angular.element('.mysvg').attr('height', ($window.innerHeight*0.92)+'px');
             console.log(clikedIndex)
             if (!gameClass.chekItem(clikedIndex))
             {
+
+                $scope.blinkColor(item, false)
                 $scope.gameMessage = 'wrong item'
                 return;
             }
+            $scope.blinkColor(item, true)
 
-
-            console.lo
 
             $scope.currentIndex = gameClass.getCurrenNumber()
             $scope.nextIndex = gameClass.getNextNumber()
@@ -91,6 +106,38 @@ angular.element('.mysvg').attr('height', ($window.innerHeight*0.92)+'px');
 
 
 
+        }
+
+        $scope.blinkColor = function (item, color)
+        {
+            if (color)
+            {
+                green = '00, 255, 00';
+            }
+            else {
+                green = '255 , 00, 00';
+            }
+            item.color = green;
+            var t = false
+            i = 0;
+
+            ss = $interval(function () {
+
+                if (t)
+                {
+                    item.color = item.oldColor;
+                } else {
+                    item.color = green;
+                }
+
+                t = !t;
+                if (i > 3)
+                {
+                    $interval.cancel(ss);
+                    item.color = item.oldColor;
+                }
+                i++;
+            }, 50);
         }
 
 
