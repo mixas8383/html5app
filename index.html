@@ -33,7 +33,8 @@
             <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header">
                 <header class="mdl-layout__header">
                     <div class="mdl-layout__header-row">
-                        <!-- Title -->
+                        <!-- Title --> 
+                       
                         <span class="mdl-layout-title" ng-bind="timerCounter"></span>
                         <!-- Add spacer, to align navigation to the right -->
                         <div class="mdl-layout-spacer"></div>
@@ -67,9 +68,9 @@
                     <defs>
                     <style id="bx-google-fonts">@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900,100italic,300italic,400,400italic,500italic,700italic,900italic);</style>
                     </defs>
-                    <path ng-repeat="item in items" ng-click="sectorClick(item)" ng-attr-d="{{item.cords}}" style="stroke: black; fill: rgb({{item.color}});"  />
+                    <path md-no-focus-style="true"  ng-repeat="item in items" ng-click="sectorClick(item)" ng-attr-d="{{item.cords}}" style="stroke: black; fill: rgb({{item.color}});"  />
 
-                    <text ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}" ng-click="numberClick(text)">{{text.gameIndex}}</text>
+                    <text md-no-focus-style="true"  ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}" ng-click="numberClick(text)">{{text.gameIndex}}</text>
 
                     </svg>
 
