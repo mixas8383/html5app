@@ -2,18 +2,13 @@
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
-    console.log('------------------------');
-    console.log(Media);
-}
- //var my_media = new Media('media/error.mp3');
+//document.addEventListener("deviceready", onDeviceReady, false);
 
 
 
 
 
-var app = angular.module('game', []).directive('resize', ['$window', function ($window) {
+var app = angular.module('game', ['ngMaterial']).directive('resize', ['$window', function ($window) {
         return {
             link: function (scope, el, attrs) {
                 var initialWidth = $window.innerWidth
@@ -31,6 +26,24 @@ var app = angular.module('game', []).directive('resize', ['$window', function ($
         };
     }]);
 app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, $interval, $window) {
+
+
+
+        $scope.params = {
+            clickSound: true
+        };
+
+
+
+        var sound = new Howl({
+            urls: ['media/error.mp3'],
+            onend: function () {
+                console.log('Finished!');
+            },
+            onloaderror: function () {
+                console.log('Error!');
+            },
+        });
 
 
 
@@ -76,16 +89,9 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
             if (!gameClass.isStarted())
             {
                 $scope.fight();
-               
+
             }
-
-
-
-
-
-
             clikedIndex = item.gameIndex;
-
             console.log(clikedIndex)
             if (!gameClass.chekItem(clikedIndex))
             {
@@ -95,26 +101,22 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
                 return;
             }
             $scope.blinkColor(item, true)
-
-
             $scope.currentIndex = gameClass.getCurrenNumber()
             $scope.nextIndex = gameClass.getNextNumber()
-
-
-
-
-
-
-
         }
+
 
         $scope.blinkColor = function (item, color)
         {
+            if ($scope.params.clickSound)
+            {
+                sound.play();
+            }
+
             if (color)
             {
                 green = '00, 255, 00';
-            }
-            else {
+            } else {
                 green = '255 , 00, 00';
             }
             item.color = green;
