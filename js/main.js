@@ -166,6 +166,7 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
 
 
         $scope.timerCounter = 0;
+        $scope.timerCounterValue = 0;
 
 
         var stop;
@@ -176,6 +177,7 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
 
             stop = $interval(function () {
                 $scope.timerCounter++;
+                $scope.resizeTimer();
             }, 1000);
         };
 
@@ -196,6 +198,22 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
             $scope.stopFight();
         });
 
+
+$scope.resizeTimer = function()
+{
+    
+     var sec_num =$scope.timerCounter; // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    $scope.timerCounterValue =  hours+':'+minutes+':'+seconds;
+    
+    
+}
 
 
 
