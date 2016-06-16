@@ -8,6 +8,7 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link href="css/material.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/angular-material.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/mystile.css" rel="stylesheet" type="text/css"/>
         <title>Hello World</title>
         <style>
             @font-face {
@@ -27,55 +28,72 @@
     <body>
 
         <!--<source src="media/error.mp3" type="audio/mpeg">-->
- 
+
         <div ng-app="game" ng-controller="gameCtrl">
 
-            <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                <header class="mdl-layout__header">
-                    <div class="mdl-layout__header-row">
-                        <!-- Title --> 
-                       
-                        <span class="mdl-layout-title" ng-bind="timerCounterValue"></span>
-                        <!-- Add spacer, to align navigation to the right -->
-                        <div class="mdl-layout-spacer"></div>
-                        <!-- Navigation -->
-                        <nav class="mdl-navigation">
 
-                            <span style="color: green" ng-bind="currentIndex"></span>
-                            <span style="color: yellow" ng-bind="nextIndex"></span>
-                            <span style="color: red" ng-bind="gameMessage"></span>
+
+
+
+            <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header" >
+                <div class="startPage" ng-show="prolog">
+                    <div class="backgroundStart">
+
+                        <img class="prolo" src="img/90.png" alt=""/>
+
+                        <div class="center">
+                            <md-button ng-click="startGame()" class="md-accent md-raised md-hue-1 mybutton1">Start</md-button>
+                        </div>
+                    </div>
+                </div>
+                
+                <header class="mdl-layout__header" style="display: none">
+                        <div class="mdl-layout__header-row">
+                            <!-- Title --> 
+
+                            <span class="mdl-layout-title" ng-bind="timerCounterValue"></span>
+                            <!-- Add spacer, to align navigation to the right -->
+                            <div class="mdl-layout-spacer"></div>
+                            <!-- Navigation -->
+
+                            <nav class="mdl-navigation">
+
+                                <span style="color: green" ng-bind="currentIndex"></span>
+                                <span style="color: yellow" ng-bind="nextIndex"></span>
+                                <span style="color: red" ng-bind="gameMessage"></span>
+                            </nav>
+                        </div>
+                    </header>
+                    <div class="mdl-layout__drawer" ng-show="game" style="display: none; background-color: #004d40;">
+                        <span class="mdl-layout-title" style="color:white">Options</span>
+                        <nav class="mdl-navigation">
+                            <ul class="demo-list-item mdl-list">
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        <md-switch ng-model="params.clickSound" class="md-primary" aria-label="Switch 1">
+                                            Sound off/on
+                                        </md-switch>
+                                    </span>
+                                </li>
+                            </ul>
                         </nav>
                     </div>
-                </header>
-                <div class="mdl-layout__drawer" style="background-color: #004d40;">
-                    <span class="mdl-layout-title" style="color:white">Options</span>
-                    <nav class="mdl-navigation">
-                        <ul class="demo-list-item mdl-list">
-                            <li class="mdl-list__item">
-                                <span class="mdl-list__item-primary-content">
-                                    <md-switch ng-model="params.clickSound" class="md-primary" aria-label="Switch 1">
-                                        Sound off/on
-                                    </md-switch>
-                                </span>
-                            </li>
-                        </ul>
-                    </nav>
+                    <main class="mdl-layout__content" ng-show="game"  style="display: none">
+
+
+                        <svg resize="vertical" class="mysvg" viewBox="0 0 575 458" xmlns="http://www.w3.org/2000/svg" " xmlns:bx="https://www.boxy-svg.com/bx" preserveAspectRatio="none" style="width: 100%;height: 80%">
+                        <defs>
+                        <style id="bx-google-fonts">@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900,100italic,300italic,400,400italic,500italic,700italic,900italic);</style>
+                        </defs>
+                        <path md-no-focus-style="true"  ng-repeat="item in items" ng-click="sectorClick(item)" ng-attr-d="{{item.cords}}" style="stroke: black; fill: rgb({{item.color}});"  />
+
+                        <text md-no-focus-style="true"  ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}" ng-click="numberClick(text)">{{text.gameIndex}}</text>
+
+                        </svg>
+
+                    </main>
                 </div>
-                <main class="mdl-layout__content">
-
-
-                    <svg resize="vertical" class="mysvg" viewBox="0 0 575 458" xmlns="http://www.w3.org/2000/svg" " xmlns:bx="https://www.boxy-svg.com/bx" preserveAspectRatio="none" style="width: 100%;height: 80%">
-                    <defs>
-                    <style id="bx-google-fonts">@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900,100italic,300italic,400,400italic,500italic,700italic,900italic);</style>
-                    </defs>
-                    <path md-no-focus-style="true"  ng-repeat="item in items" ng-click="sectorClick(item)" ng-attr-d="{{item.cords}}" style="stroke: black; fill: rgb({{item.color}});"  />
-
-                    <text md-no-focus-style="true"  ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}" ng-click="numberClick(text)">{{text.gameIndex}}</text>
-
-                    </svg>
-
-                </main>
-            </div>
+          
 
 
 

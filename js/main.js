@@ -33,6 +33,23 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
             clickSound: true
         };
 
+        $scope.game = false;
+        $scope.prolog = true;
+
+        $scope.startGame = function ()
+        {
+
+            console.log('-----');
+           
+            $scope.game = true;
+           
+            $scope.prolog = false;
+            $('.mnCont').show();
+            $('.mdl-layout__header').show();
+            $('.mdl-layout__drawer').show();
+            $('.mdl-layout__content').show();
+            $scope.fight();
+        }
 
 
         var sound = new Howl({
@@ -88,7 +105,7 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
             text = $scope.texts[textIdx];
             if (!gameClass.isStarted())
             {
-                $scope.fight();
+                
 
             }
             clikedIndex = item.gameIndex;
@@ -199,21 +216,27 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
         });
 
 
-$scope.resizeTimer = function()
-{
-    
-     var sec_num =$scope.timerCounter; // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+        $scope.resizeTimer = function ()
+        {
 
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    $scope.timerCounterValue =  hours+':'+minutes+':'+seconds;
-    
-    
-}
+            var sec_num = $scope.timerCounter; // don't forget the second param
+            var hours = Math.floor(sec_num / 3600);
+            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+            if (hours < 10) {
+                hours = "0" + hours;
+            }
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            $scope.timerCounterValue = hours + ':' + minutes + ':' + seconds;
+
+
+        }
 
 
 

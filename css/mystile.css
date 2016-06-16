@@ -1,0 +1,27 @@
+.md-button.md-default-theme.md-hue-1.md-accent.md-raised, .md-button.md-hue-1.md-accent.md-raised, .md-button.md-default-theme.md-hue-1.md-accent.md-fab, .md-button.md-hue-1.md-accent.md-fab
+{
+    background-color: rgb(16, 108, 200);
+}
+
+.md-button.md-default-theme.md-hue-1.md-accent.md-raised:not([disabled]):hover, .md-button.md-hue-1.md-accent.md-raised:not([disabled]):hover, .md-button.md-default-theme.md-hue-1.md-accent.md-fab:not([disabled]):hover, .md-button.md-hue-1.md-accent.md-fab:not([disabled]):hover
+{
+    background-color: rgb(16, 108, 200);
+}
+.backgroundStart
+{
+
+}
+.prolo
+{
+    
+    display: block;
+    margin: auto;
+    width: 40%;
+
+}
+.center {
+    margin: auto;
+    width: 25%;
+    
+    padding: 10px;
+}
