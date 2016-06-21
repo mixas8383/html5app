@@ -13,7 +13,7 @@ var app = angular.module('game', ['ngMaterial']).directive('resize', ['$window',
             link: function (scope, el, attrs) {
                 var initialWidth = $window.innerWidth
                 $window.in
-                console.log(initialWidth)
+
 
 
                 angular.element($window).on('resize', function () {
@@ -36,27 +36,31 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
         if (soundStart == undefined)
         {
             soundStart = true;
-        }else {
-            if(soundStart == 'true')
+        } else {
+            if (soundStart == 'true')
             {
                 soundStart = true;
-            }else {
+            } else {
                 soundStart = false;
             }
 
         }
- 
-        
-        
-console.log(soundStart)
+
+
+
+
         $scope.params = {
             clickSound: soundStart
         };
 
+        $scope.params.showWrong = false;
+        $scope.params.showOk = false;
+        $scope.params.showFirst = false;
+        $scope.showOk = false;
 
         $scope.$watch('params.clickSound', function (newValue, oldValue) {
 
-            console.log(newValue)
+
             // Check if value has changes
             window.localStorage['params.clickSound'] = newValue;
 
@@ -70,8 +74,6 @@ console.log(soundStart)
 
         $scope.startGame = function ()
         {
-
-            console.log('-----');
 
             $scope.game = true;
 
@@ -87,10 +89,10 @@ console.log(soundStart)
         var sound = new Howl({
             urls: ['media/error.mp3'],
             onend: function () {
-                console.log('Finished!');
+                // console.log('Finished!');
             },
             onloaderror: function () {
-                console.log('Error!');
+                // console.log('Error!');
             },
         });
 
@@ -111,7 +113,7 @@ console.log(soundStart)
         $scope.tempFigureIndex = 0;
         $scope.relations = [];
         $scope.items = coords;
-        $scope.currentIndex = 0;
+        $scope.currentIndex = '';
         $scope.nextIndex = 1;
         $scope.gameMessage = ''
         gameClass.setRelation(relation);
@@ -141,29 +143,36 @@ console.log(soundStart)
 
             }
             clikedIndex = item.gameIndex;
-            console.log(clikedIndex)
+            //console.log(clikedIndex)
             if (!gameClass.chekItem(clikedIndex))
             {
 
                 $scope.blinkColor(item, false)
-                $scope.gameMessage = 'wrong item'
+                $scope.params.showWrong = true;
+                $scope.showOk = false;
                 return;
             }
+
+            $scope.params.showFirst = true
+            $scope.params.showWrong = false;
+            $scope.showOk = true;
+            console.log($scope.params.showOk)
             $scope.blinkColor(item, true)
             $scope.currentIndex = gameClass.getCurrenNumber()
             $scope.nextIndex = gameClass.getNextNumber()
         }
 
 
+
         $scope.blinkColor = function (item, color)
         {
-            
-            console.log($scope.params.clickSound)
+
+
             if ($scope.params.clickSound == true)
             {
                 sound.play();
             }
- 
+
             if (color)
             {
                 green = '00, 255, 00';
