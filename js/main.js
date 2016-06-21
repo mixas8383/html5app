@@ -29,9 +29,41 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
 
 
 
+
+        soundStart = window.localStorage['params.clickSound']
+
+
+        if (soundStart == undefined)
+        {
+            soundStart = true;
+        }else {
+            if(soundStart == 'true')
+            {
+                soundStart = true;
+            }else {
+                soundStart = false;
+            }
+
+        }
+ 
+        
+        
+console.log(soundStart)
         $scope.params = {
-            clickSound: true
+            clickSound: soundStart
         };
+
+
+        $scope.$watch('params.clickSound', function (newValue, oldValue) {
+
+            console.log(newValue)
+            // Check if value has changes
+            window.localStorage['params.clickSound'] = newValue;
+
+
+            // Do anything you like here
+        });
+
 
         $scope.game = false;
         $scope.prolog = true;
@@ -40,9 +72,9 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
         {
 
             console.log('-----');
-           
+
             $scope.game = true;
-           
+
             $scope.prolog = false;
             $('.mnCont').show();
             $('.mdl-layout__header').show();
@@ -105,7 +137,7 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
             text = $scope.texts[textIdx];
             if (!gameClass.isStarted())
             {
-                
+
 
             }
             clikedIndex = item.gameIndex;
@@ -125,11 +157,13 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
 
         $scope.blinkColor = function (item, color)
         {
-            if ($scope.params.clickSound)
+            
+            console.log($scope.params.clickSound)
+            if ($scope.params.clickSound == true)
             {
                 sound.play();
             }
-
+ 
             if (color)
             {
                 green = '00, 255, 00';
