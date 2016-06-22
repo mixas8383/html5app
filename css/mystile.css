@@ -90,3 +90,7 @@ body{
 .start img:hover{
 	opacity: 1;
 }
+.mdl-layout__header
+{
+    background-color: #00897b !important;
+}
