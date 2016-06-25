@@ -79,8 +79,15 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
         $scope.newGame = function (t)
         {
             $scope.hideAll();
-            $scope.resetFight()
-            $scope.timerCounterValue = '00:00:00'
+            $scope.resetFight();
+            $scope.timerCounterValue = '00:00:00';
+            $scope.currentIndex = '';
+            $scope.nextIndex = 1;
+            $scope.gameMessage = '';
+            $scope.params.showWrong = false;
+            $scope.params.showOk = false;
+            $scope.params.showFirst = false;
+            $scope.showOk = false;
             if (t)
             {
                 $('.mdl-layout__obfuscator').click();
