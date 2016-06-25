@@ -27,7 +27,7 @@
     </head>
     <body>
 
-<!--<source src="media/error.mp3" type="audio/mpeg">-->
+        <!--<source src="media/error.mp3" type="audio/mpeg">-->
 
         <div ng-app="game" ng-controller="gameCtrl">
 
@@ -39,15 +39,17 @@
                 <div class="startPage" ng-show="prolog">
                     <div class="backgroundStart">
 
- 
+
                         <div class="logo"><img width="200px" src="img/logo.png"/></div>
 
 
                         <div class="start" ng-click="startGame()"><img width="100px" src="img/start.png"/></div>
 
-                        
+
                     </div>
                 </div>
+
+
 
                 <header class="mdl-layout__header" style="display: none">
                     <div class="mdl-layout__header-row">
@@ -87,29 +89,68 @@
                                     </md-switch>
                                 </span>
                             </li>
+
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content"  ng-click="newGame()">
+                                    New game
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span ng-click="displayResultsLayout()" class="mdl-list__item-primary-content" ng-show="showResults">
+                                    Results
+                                </span>
+                            </li>
                         </ul>
                     </nav>
                 </div>
                 <main class="mdl-layout__content" ng-show="game"  style="display: none">
 
 
-                    <svg resize="vertical" class="mysvg" viewBox="0 0 575 458" xmlns="http://www.w3.org/2000/svg" " xmlns:bx="https://www.boxy-svg.com/bx" preserveAspectRatio="none" style="width: 100%;height: 80%">
-                    <defs>
-                    <style id="bx-google-fonts">@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900,100italic,300italic,400,400italic,500italic,700italic,900italic);</style>
-                    </defs>
-                    <path md-no-focus-style="true"  ng-repeat="item in items" ng-click="sectorClick(item)" ng-attr-d="{{item.cords}}" style="stroke: black; fill: rgb({{item.color}});"  />
+                    <div class="gameCanvas" >
 
-                    <text md-no-focus-style="true"  ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}" ng-click="numberClick(text)">{{text.gameIndex}}</text>
+                        <svg resize="vertical" class="mysvg" viewBox="0 0 575 458" xmlns="http://www.w3.org/2000/svg"  xmlns:bx="https://www.boxy-svg.com/bx" preserveAspectRatio="none" style="width: 100%;height: 80%">
+                        <defs>
+                        <style id="bx-google-fonts">@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900,100italic,300italic,400,400italic,500italic,700italic,900italic);</style>
+                        </defs>
+                        <path md-no-focus-style="true"  ng-repeat="item in items" ng-click="sectorClick(item)" ng-attr-d="{{item.cords}}" style="stroke: black; fill: rgb({{item.color}});"  />
 
-                    </svg>
+                        <text md-no-focus-style="true"  ng-repeat="text in texts" ng-attr-x="{{text.x}}" ng-attr-y="{{text.y}}" style="font-size: 24px; font-family: Roboto; word-spacing: 0px;" ng-attr-transform="{{text.transform}}" ng-click="numberClick(text)">{{text.gameIndex}}</text>
+
+                        </svg>
+                    </div>
+                    <div class="result" style="display: none;" >
+                        <div class="backgroundStart">
+
+                            <div class="mdl-layout-title" ng-bind="timerCounterValue"></div>
+                            <div   >share on facebook</div>
+                            <span ng-click="displayResultsLayout()" >Results</div>
+                        <div   >Restart</div>
+
+                    </div>
+
+                    <div class="allresult" style="display: none;" >
+
+                        <div class="lastResult">
+                            <span   >Last result </span>
+                            <span   ng-bind="resizeTimer(lastresults)"></span>
+                        </div>
+                        <div class="lResult">
+                            <span   >Best result </span>
+                            <span   ng-bind="resizeTimer(bestresults)"></span>
+                        </div>
+                        <div class="resContinueButton">
+                            <span ng-click="continueGame()">continue game</span>
+                        </div>
+
+
+
+                    </div>
+
 
                 </main>
+
+
             </div>
-
-
-
-
-
 
 
         </div>
@@ -118,29 +159,37 @@
 
 
 
-        <script type="text/javascript" src="js/index.js"></script>
-        <script src="js/libs/jquery/jquery.js" type="text/javascript"></script>
-        <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
-
-        <!-- Angular Material-->
-        <script src="js/libs/angular.js/angular-animate.min.js" type="text/javascript"></script>
-        <script src="js/libs/angular.js/angular-aria.min.js" type="text/javascript"></script>
-        <script src="js/libs/angular.js/angular-messages.min.js" type="text/javascript"></script>
-        <script src="js/libs/angular.js/angular-material.min.js" type="text/javascript"></script>
 
 
-        <!--        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-                <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-                <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>-->
-
-        <!-- Angular Material-->
-
-        <script src="js/howl.js" type="text/javascript"></script>
-        <script src="js/coords.js" type="text/javascript"></script>
-        <script src="js/game.js" type="text/javascript"></script>
-        <script src="js/main.js" type="text/javascript"></script>
-        <script src="js/material.min.js" type="text/javascript"></script>
+    </div>
 
 
-    </body>
+
+
+
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/libs/jquery/jquery.js" type="text/javascript"></script>
+    <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
+
+    <!-- Angular Material-->
+    <script src="js/libs/angular.js/angular-animate.min.js" type="text/javascript"></script>
+    <script src="js/libs/angular.js/angular-aria.min.js" type="text/javascript"></script>
+    <script src="js/libs/angular.js/angular-messages.min.js" type="text/javascript"></script>
+    <script src="js/libs/angular.js/angular-material.min.js" type="text/javascript"></script>
+
+
+    <!--        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>-->
+
+    <!-- Angular Material-->
+
+    <script src="js/howl.js" type="text/javascript"></script>
+    <script src="js/coords.js" type="text/javascript"></script>
+    <script src="js/game.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="js/material.min.js" type="text/javascript"></script>
+
+
+</body>
 </html>

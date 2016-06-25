@@ -93,6 +93,17 @@ var Gm = function () {
         return array;
     }
 
+    this.isEnd = function ()
+    {
+
+console.log(this.currentNumber )
+        if (this.currentNumber == 2)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
 
 
