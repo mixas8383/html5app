@@ -76,12 +76,15 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
         var gameClass = ''
 
 
-        $scope.newGame = function ()
+        $scope.newGame = function (t)
         {
             $scope.hideAll();
             $scope.resetFight()
-
-            $('.mdl-layout__obfuscator').click();
+            $scope.timerCounterValue = '00:00:00'
+            if (t)
+            {
+                $('.mdl-layout__obfuscator').click();
+            }
             $scope.startGame();
         }
 
@@ -301,20 +304,28 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
             // Make sure that the interval is destroyed too
             $scope.stopFight();
         });
-        
-        
-        $scope.pauseGame = function()
+
+        $scope.isWin = function ()
+        {
+            if (gameClass.isEnd())
+            {
+                return true;
+            }
+            return false
+        }
+
+        $scope.pauseGame = function ()
         {
             $scope.stopFight();
         }
-        
-        $scope.continueGame = function()
+
+        $scope.continueGame = function ()
         {
             $scope.hideAll();
             $('.gameCanvas').show()
             $scope.fight();
         }
-        
+
 
 
         $scope.resizeTimer = function (def)
@@ -412,17 +423,21 @@ app.controller('gameCtrl', ['$scope', '$interval', '$window', function ($scope, 
             return true;
         }
 
-        $scope.displayResultsLayout = function ()
+        $scope.displayResultsLayout = function (t)
         {
             $scope.pauseGame();
             $scope.hideAll();
             $scope.getResults();
             $('.allresult').show();
-            $('.mdl-layout__obfuscator').click();
+            if (t)
+            {
+                $('.mdl-layout__obfuscator').click();
+            }
         }
         $scope.displayResult = function ()
         {
             $scope.hideAll();
+            $('.result').show();
 
         }
 

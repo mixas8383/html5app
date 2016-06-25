@@ -91,12 +91,12 @@
                             </li>
 
                             <li class="mdl-list__item">
-                                <span class="mdl-list__item-primary-content"  ng-click="newGame()">
+                                <span class="mdl-list__item-primary-content"  ng-click="newGame(true)">
                                     New game
                                 </span>
                             </li>
                             <li class="mdl-list__item">
-                                <span ng-click="displayResultsLayout()" class="mdl-list__item-primary-content" ng-show="showResults">
+                                <span ng-click="displayResultsLayout(true)" class="mdl-list__item-primary-content" ng-show="showResults">
                                     Results
                                 </span>
                             </li>
@@ -123,8 +123,8 @@
 
                             <div class="mdl-layout-title" ng-bind="timerCounterValue"></div>
                             <div   >share on facebook</div>
-                            <span ng-click="displayResultsLayout()" >Results</div>
-                        <div   >Restart</div>
+                            <span ng-click="displayResultsLayout(false)" >Results</div>
+                        <div  ng-click="newGame(false)" >New game</div>
 
                     </div>
 
@@ -139,7 +139,7 @@
                             <span   ng-bind="resizeTimer(bestresults)"></span>
                         </div>
                         <div class="resContinueButton">
-                            <span ng-click="continueGame()">continue game</span>
+                            <span ng-click="continueGame()" ng-hide="isWin()">continue game</span>
                         </div>
 
 
